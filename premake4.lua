@@ -2,7 +2,6 @@
 -- Premake4 build script (http://industriousone.com/premake/download)
 --
 
-
 solution 'cpp-bench'
     configurations {'Debug', 'Release'}
     language 'C++'
@@ -41,6 +40,14 @@ solution 'cpp-bench'
             '_CRT_SECURE_NO_WARNINGS',
             '_SCL_SECURE_NO_WARNINGS',
             'NOMINMAX',
+        }
+        end
+        
+        if os.get() == 'linux' then
+        buildoptions { '-std=c++11' }
+        defines 
+        { 
+            '__STDC_LIMIT_MACROS',        
         }
         end
         
