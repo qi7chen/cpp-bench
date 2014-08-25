@@ -15,6 +15,7 @@ BENCHMARK(ItoaSprintf, n)
     CHECK(r == n);
 }
 
+#ifdef _MSC_VER
 BENCHMARK_RELATIVE(ItoaItoa, n)
 {
     char buf[20];
@@ -27,6 +28,7 @@ BENCHMARK_RELATIVE(ItoaItoa, n)
     }
     CHECK(r == n);
 }
+#endif
 
 BENCHMARK_RELATIVE(ItoaMwilson, n)
 {
