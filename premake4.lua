@@ -49,5 +49,9 @@ solution 'cpp-bench'
         { 
             '__STDC_LIMIT_MACROS',        
         }
+        links
+        {
+            'rt',
+        }
         end
         
