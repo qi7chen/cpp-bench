@@ -25,6 +25,7 @@ solution 'cpp-bench'
         {
             'src/*.h',
             'src/*.cpp',
+            'test/*.h',
             'test/*.cpp',
         }
         includedirs
@@ -48,6 +49,10 @@ solution 'cpp-bench'
         defines 
         { 
             '__STDC_LIMIT_MACROS',        
+        }
+        links
+        {
+            'rt',
         }
         end
         
