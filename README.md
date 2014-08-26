@@ -53,8 +53,8 @@ BENCHMARK_DRAW_LINE()
 
 ## Results
 
-The `src\ItoaBench.cpp` takes an example usage of cpp-bench, measures different `itoa` algorithms.
-taken from `rapidjson`'s [itoa-benchmark](https://github.com/miloyip/itoa-benchmark).
+The [ItoaBench.cpp](https://github.com/ichenq/cpp-bench/blob/master/test/ItoaBench.cpp) takes an example usage of cpp-bench,
+ measures different `itoa` algorithms, taken from `rapidjson`'s [itoa-benchmark](https://github.com/miloyip/itoa-benchmark).
 
 Function      | Description
 --------------|-----------
@@ -63,7 +63,7 @@ naive         | Compute division/modulo of 10 for each digit, store digits in te
 count         | Count number of decimal digits first, using technique from [1].
 lut           | Uses lookup table (LUT) of digit pairs for division/modulo of 100. Mentioned in [2]
 
-The following are `sequential` results measured on a 64bit PC (Core i5 @3.10Ghz)
+The following are sequential results measured on a 64-bit PC (Core i5 @3.10Ghz)
 
 ~~~~~~~~cpp
 Ubuntu x64 12.04 (i5-3.10GHz 4G)
