@@ -37,7 +37,7 @@
 
 using namespace std;
 
-DEFINE_bool(benchmark, false, "Run benchmarks.");
+DEFINE_bool(benchmark, true, "Run benchmarks.");
 
 DEFINE_string(bm_regex, "",
     "Only benchmarks whose names match this regex will be run.");
