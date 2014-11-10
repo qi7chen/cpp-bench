@@ -1,6 +1,6 @@
-#include "Benchmark.h"
-#include "Logging.h"
-#include "Itoa.h"
+#include "benchmark.h"
+#include "logging.h"
+#include "itoa.h"
 
 BENCHMARK(ItoaSprintf, n)
 {
@@ -66,3 +66,4 @@ BENCHMARK_RELATIVE(ItoaLut, n)
     }
     CHECK(r == n);
 }
+

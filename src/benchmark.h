@@ -1,3 +1,7 @@
+// Copyright (C) 2014 ichenq@gmail.com. All rights reserved.
+// Distributed under the terms and conditions of the Apache License.
+// See accompanying files LICENSE.
+
 /*
  * Copyright 2014 Facebook, Inc.
  *
@@ -20,11 +24,9 @@
 #include <string>
 #include <utility>
 #include <functional>
-#include "Preprocessor.h"
-#include "CmdLineFlags.h"
+#include "preprocessor.h"
 
 
-DECLARE_bool(benchmark);
 
 /**
  * Runs all benchmarks defined. Usually put in main().
@@ -44,10 +46,16 @@ void addBenchmarkImpl(const char* file,
                       const char* name,
                       std::function<TimeIterPair(unsigned int)>);
 
+typedef std::function<void(void)> BenchmarkInitializer;
+
+void addBenchmarkInit(BenchmarkInitializer initializer);
+
 } // namespace detail
 
 // Current tick count(in nanoseconds)
 uint64_t getNowTickCount();
+
+
 
 /**
  * Supporting type for BENCHMARK_SUSPEND defined below.
@@ -164,23 +172,23 @@ void addBenchmark(const char* file, const char* name, Lambda&& lambda)
  * it into thinking var is in fact needed.
  */
 #ifdef _MSC_VER
-
 #pragma optimize("", off)
+#endif
 
 template <class T>
 void doNotOptimizeAway(T&& datum)
 {
-    datum = datum;
+    // This forces the value to never be optimized away
+    // by taking a reference then using it.
+    const void* p = &datum;
+    if (p == nullptr)
+    {
+        putchar(*reinterpret_cast<const char*>(p));
+    }
 }
 
+#ifdef _MSC_VER
 #pragma optimize("", on)
-
-#else
-template <class T>
-void doNotOptimizeAway(T&& datum)
-{
-    asm volatile("" : "+r" (datum));
-}
 #endif
 
 
@@ -239,6 +247,15 @@ void doNotOptimizeAway(T&& datum)
     addBenchmark(__FILE__, "-",                                     \
         [](unsigned) -> unsigned { return 0; }),                    \
     true);
+
+/**
+ * Draws a line of dashes.
+ */
+#define BENCHMARK_INITIALIZER(funName)                              \
+    static void funName();                                          \
+    static bool FB_ANONYMOUS_VARIABLE(follyBenchmarkUnused) = (     \
+    detail::addBenchmarkInit(funName), true);                       \
+    static void funName()
 
 /**
  * Allows execution of code that doesn't count torward the benchmark's

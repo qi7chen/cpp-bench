@@ -1,22 +1,26 @@
+// Copyright (C) 2014 ichenq@gmail.com. All rights reserved.
+// Distributed under the terms and conditions of the Apache License.
+// See accompanying files LICENSE.
+
 /*
-* Copyright 2014 Facebook, Inc.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2014 Facebook, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 // @author Andrei Alexandrescu (andrei.alexandrescu@fb.com)
 
-#include "Benchmark.h"
+#include "benchmark.h"
 #include <cmath>
 #include <ctime>
 #include <cassert>
@@ -27,13 +31,9 @@
 #include <regex>
 #include <algorithm>
 #include <iostream>
-#include "Logging.h"
-
-
-#ifdef _WIN32
-#include <windows.h>
-#define snprintf    sprintf_s
-#endif
+#include "platform.h"
+#include "logging.h"
+#include "cmdlineflags.h"
 
 using namespace std;
 
@@ -67,6 +67,12 @@ vector<BenchmarkItem>& getBenchmarks()
     return benchmarks;
 }
 
+vector<detail::BenchmarkInitializer>& getBenchmarkInitializerList()
+{
+    static vector<detail::BenchmarkInitializer> initialier_list;
+    return initialier_list;
+}
+
 } // anonymous namespace
 
 
@@ -78,6 +84,12 @@ BENCHMARK(globalBenchmarkBaseline, n)
 #else
     asm volatile("");
 #endif
+}
+
+void detail::addBenchmarkInit(std::function<void(void)> initializer)
+{
+    auto& init_list = getBenchmarkInitializerList();
+    init_list.emplace_back(initializer);
 }
 
 void detail::addBenchmarkImpl(const char* file,
@@ -162,6 +174,12 @@ static void printBenchmarkResultsAsTable(
 
 void runBenchmarks()
 {
+    auto& init_list = getBenchmarkInitializerList();
+    for (auto& func : init_list)
+    {
+        func();
+    }
+
     auto& benchmarks = getBenchmarks();
     CHECK(!benchmarks.empty());
     vector<tuple<const char*, const char*, double>> results;

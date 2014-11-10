@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Benchmark.h"
+#include "benchmark.h"
 
 using std::cout;
 using std::endl;
