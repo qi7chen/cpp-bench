@@ -5,7 +5,7 @@
 solution 'cpp-bench'
     configurations {'Debug', 'Release'}
     language 'C++'
-    flags {'ExtraWarnings'}
+    --flags {'ExtraWarnings'}
     targetdir 'bin'
     platforms {'x32','x64'}
 
