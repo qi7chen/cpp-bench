@@ -17,6 +17,25 @@ solution 'cpp-bench'
         defines { 'NDEBUG' }
         flags { 'Symbols', 'Optimize' }
 
+    configuration 'vs*'
+        defines
+        {
+            'WIN32',
+            'WIN32_LEAN_AND_MEAN',
+            '_WIN32_WINNT=0x0600',
+            '_CRT_SECURE_NO_WARNINGS',
+            '_SCL_SECURE_NO_WARNINGS',
+            '_WINSOCK_DEPRECATED_NO_WARNINGS',
+            'NOMINMAX',
+        }
+    configuration 'gmake'
+        buildoptions '-std=c++11'
+        defines
+        {
+            '__STDC_LIMIT_MACROS',
+        }
+        links 'rt'
+        
     project 'benchmark'
         location 'build'
         kind 'ConsoleApp'
@@ -32,27 +51,3 @@ solution 'cpp-bench'
         {
             'src',
         }
-        if os.get() == 'windows' then
-        defines 
-        {
-            'WIN32',
-            'WIN32_LEAN_AND_MEAN',
-            '_WIN32_WINNT=0x0600',
-            '_CRT_SECURE_NO_WARNINGS',
-            '_SCL_SECURE_NO_WARNINGS',
-            'NOMINMAX',
-        }
-        end
-        
-        if os.get() == 'linux' then
-        buildoptions { '-std=c++11' }
-        defines 
-        { 
-            '__STDC_LIMIT_MACROS',        
-        }
-        links
-        {
-            'rt',
-        }
-        end
-        
