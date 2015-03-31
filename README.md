@@ -9,6 +9,14 @@ Lightweight bencharking component for your C++ code.
 This component was taken from [folly](https://github.com/facebook/folly/blob/master/folly/Benchmark.h), 
 with efforts porting to Visual C++.
 
+
+## Build
+
+Obtain [premake4](http://industriousone.com/premake/download).
+
+Type `premake4 vs2013` on Windows or `premake4 gmake` on Linux
+
+
 ## Usage
 
 The `BENCHMARK` macro introduces a benchmark function:
