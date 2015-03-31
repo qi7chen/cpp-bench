@@ -31,12 +31,11 @@
 #include "Logging.h"
 #include <stdio.h>
 #include <mutex>
+#include "preprocessor.h"
 
 #ifdef _WIN32
 #include <Windows.h>
-#define snprintf _snprintf
 #endif
-
 
 using std::mutex;
 using std::lock_guard;

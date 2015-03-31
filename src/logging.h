@@ -57,59 +57,59 @@ enum LogLevel {
 
 namespace internal {
 
-    class LogFinisher;
+class LogFinisher;
 
-    class LogMessage {
-    public:
-        LogMessage(LogLevel level, const char* filename, int line)
-            : level_(level), filename_(filename), line_(line)
-        {
-        }
+class LogMessage {
+public:
+    LogMessage(LogLevel level, const char* filename, int line)
+        : level_(level), filename_(filename), line_(line)
+    {
+    }
 
-        ~LogMessage()
-        {
-        }
+    ~LogMessage()
+    {
+    }
 
-        LogMessage& operator<<(const std::string& value)
-        {
-            message_ += value;
-            return *this;
-        }
+    LogMessage& operator<<(const std::string& value)
+    {
+        message_ += value;
+        return *this;
+    }
 
-        LogMessage& operator<<(const char* value)
-        {
-            message_ += value;
-            return *this;
-        }
+    LogMessage& operator<<(const char* value)
+    {
+        message_ += value;
+        return *this;
+    }
 
-        template <typename T>
-        typename std::enable_if<
-            std::is_arithmetic<T>::value
-            || std::is_enum<T>::value, LogMessage&>::type
-            operator<<(T value)
-        {
-            std::ostringstream os;
-            os << value;
-            message_ += os.str();
-            return *this;
-        }
+    template <typename T>
+    typename std::enable_if<
+        std::is_arithmetic<T>::value
+        || std::is_enum<T>::value, LogMessage&>::type
+        operator<<(T value)
+    {
+        std::ostringstream os;
+        os << value;
+        message_ += os.str();
+        return *this;
+    }
 
-    private:
-        friend class LogFinisher;
-        void Finish();
+private:
+    friend class LogFinisher;
+    void Finish();
 
-        LogLevel    level_;
-        const char* filename_;
-        int         line_;
-        std::string message_;
-    };
+    LogLevel    level_;
+    const char* filename_;
+    int         line_;
+    std::string message_;
+};
 
-    // Used to make the entire "LOG(BLAH) << etc." expression have a void return
-    // type and print a newline after each message.
-    class LogFinisher {
-    public:
-        void operator=(LogMessage& other);
-    };
+// Used to make the entire "LOG(BLAH) << etc." expression have a void return
+// type and print a newline after each message.
+class LogFinisher {
+public:
+    void operator=(LogMessage& other);
+};
 
 }  // namespace internal
 
