@@ -39,7 +39,6 @@ solution 'cpp-bench'
     project 'benchmark'
         location 'build'
         kind 'ConsoleApp'
-        uuid '31BC2F58-F374-4984-B490-F1F08ED02DD3'
         files
         {
             'src/*.h',
