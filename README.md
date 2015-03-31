@@ -1,13 +1,13 @@
 # cpp-bench
 
 
-Lightweight bencharking component for your C++ code.
+Lightweight benchmark component for your C++ code.
 
 
 ## Introduction
 
 This component was taken from [folly](https://github.com/facebook/folly/blob/master/folly/Benchmark.h), 
-with efforts porting to Visual C++.
+with efforts porting to Visual C++ 2013.
 
 
 ## Build
