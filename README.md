@@ -12,9 +12,9 @@ with efforts porting to Visual C++ 2013.
 
 ## Build
 
-Obtain [premake4](http://industriousone.com/premake/download).
+Obtain [premake5](http://premake.github.io/download.html).
 
-Type `premake4 vs2013` on Windows or `premake4 gmake` on Linux
+Type `premake5 vs2013` on Windows or `premake5 gmake && make config=release_x64` on Linux
 
 
 ## Usage
