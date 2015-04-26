@@ -36,7 +36,7 @@ solution 'cpp-bench'
         }
         links 'rt'
         
-    project 'benchmark'
+    project 'benchmark_itoa'
         location 'build'
         kind 'ConsoleApp'
         files
