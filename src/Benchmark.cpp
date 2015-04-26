@@ -16,7 +16,7 @@
 
 // @author Andrei Alexandrescu (andrei.alexandrescu@fb.com)
 
-#include "benchmark.h"
+#include "Benchmark.h"
 #include <cmath>
 #include <ctime>
 #include <cassert>
