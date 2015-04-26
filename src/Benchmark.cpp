@@ -20,6 +20,7 @@
 #include <cmath>
 #include <ctime>
 #include <cassert>
+#include <cstring>
 #include <limits>
 #include <vector>
 #include <tuple>

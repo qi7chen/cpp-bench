@@ -29,7 +29,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Logging.h"
-#include <stdio.h>
+#include <cstdio>
+#include <cstring>
 #include <mutex>
 #include "Preprocessor.h"
 
