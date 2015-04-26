@@ -1,5 +1,5 @@
-#include "benchmark.h"
-#include "logging.h"
+#include "Benchmark.h"
+#include "Logging.h"
 #include "itoa.h"
 
 BENCHMARK(ItoaSprintf, n)

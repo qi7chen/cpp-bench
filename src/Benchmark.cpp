@@ -27,9 +27,8 @@
 #include <regex>
 #include <algorithm>
 #include <iostream>
-#include "platform.h"
-#include "logging.h"
-#include "cmdlineflags.h"
+#include "Logging.h"
+#include "CmdLineFlags.h"
 
 #ifdef _WIN32
 #include <Windows.h>
