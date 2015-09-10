@@ -14,7 +14,7 @@ with efforts porting to Visual C++ 2013.
 
 Obtain [premake5](http://premake.github.io/download.html).
 
-Type `premake5 vs2013` on Windows or `premake5 gmake && make config=release_x64` on Linux
+Type `premake5 vs2013` on Windows or `premake5 gmake && make config=release` on Linux
 
 
 ## Usage
