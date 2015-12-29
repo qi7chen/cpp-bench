@@ -109,3 +109,8 @@ ItoaLut                                          332.35%    21.20ns   47.16M
 
 `iters/s` 表示函数每秒可以迭代多少次
 
+
+
+[1]: https://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10
+
+[2]: http://www.slideshare.net/andreialexandrescu1/three-optimization-tips-for-c-15708507
