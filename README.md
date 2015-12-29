@@ -1,25 +1,23 @@
 # cpp-bench
 
 
-Lightweight benchmark component for your C++ code.
+cpp-bench是一个非常轻量级的C++基准测试组件(benchmark component)。
 
 
 ## Introduction
 
-This component was taken from [folly](https://github.com/facebook/folly/blob/master/folly/Benchmark.h), 
-with efforts porting to Visual C++ 2013.
+这个组件取自[folly](https://github.com/facebook/folly/blob/master/folly/Benchmark.h),
+并且移植到了Visual C++ 2013.
 
 
 ## Build
 
-Obtain [premake5](http://premake.github.io/download.html).
-
-Type `premake5 vs2013` on Windows or `premake5 gmake && make config=release` on Linux
+下载 [premake5](http://premake.github.io/download.html).
 
 
-## Usage
+## API
 
-The `BENCHMARK` macro introduces a benchmark function:
+使用 `BENCHMARK` 宏来引入一项基准测试
 ~~~~~~~~cpp
 BENCHMARK(vectorPushBack, n)
 {
@@ -27,8 +25,9 @@ BENCHMARK(vectorPushBack, n)
    v.push_back(42);
 }
 ~~~~~~~~
-and any number of `BENCHMARK_RELATIVE' macro defined introduce relative benchmarks associated with a
-baseline:
+
+后面所有的 `BENCHMARK_RELATIVE' 宏都以前面的benchmark为基准
+
 ~~~~~~~~cpp
 BENCHMARK_RELATIVE(vectorPushFront, n)
 {
@@ -38,31 +37,34 @@ BENCHMARK_RELATIVE(vectorPushFront, n)
 ~~~~~~~~
 
 
-`BENCHMARK_SUSPEND` allows execution of code that doesn't count torward the benchmark's
-time budget:
+在`BENCHMARK_SUSPEND` 宏里面的代码不会计入基准测试时间。benchmark's
+
 ~~~~~~~~cpp
-BENCHMARK(insertVectorBegin, n) 
+BENCHMARK(insertVectorBegin, n)
 {
    vector<int> v;
-   BENCHMARK_SUSPEND 
+   BENCHMARK_SUSPEND
    {
      v.reserve(n);
    }
-   for(auto i = 0; i < n; i++) 
+   for(auto i = 0; i < n; i++)
    {
      v.insert(v.begin(), 42);
    }
 }
 ~~~~~~~~
-and `BENCHMARK_DRAW_LINE` draws a line of dashes.
+
+可以使用`BENCHMARK_DRAW_LINE` 宏画一条线。
+
 ~~~~~~~~cpp
 BENCHMARK_DRAW_LINE()
 ~~~~~~~~
 
-## Results
+## 示例
 
-The [ItoaBench.cpp](https://github.com/ichenq/cpp-bench/blob/master/test/ItoaBench.cpp) takes an example usage of cpp-bench,
- measures different `itoa` algorithms, taken from `rapidjson`'s [itoa-benchmark](https://github.com/miloyip/itoa-benchmark).
+以 [ItoaBench.cpp](https://github.com/ichenq/cpp-bench/blob/master/test/ItoaBench.cpp)为例：
+它测试不同的整数到字符串转换方法的效率。
+
 
 Function      | Description
 --------------|-----------
@@ -71,7 +73,8 @@ naive         | Compute division/modulo of 10 for each digit, store digits in te
 count         | Count number of decimal digits first, using technique from [1].
 lut           | Uses lookup table (LUT) of digit pairs for division/modulo of 100. Mentioned in [2]
 
-The following are sequential results measured on a 64-bit PC (Core i5 @3.10Ghz)
+
+这是在我机器上测试的结果(Core i5 @3.10Ghz)：
 
 ~~~~~~~~cpp
 Ubuntu x64 12.04 (i5-3.10GHz 4G)
@@ -97,8 +100,12 @@ ItoaLut                                          424.08%    24.17ns   41.38M
 ----------------------------------------------------------------------------
 ~~~~~~~~
 
-## References
 
-[1] Anderson, [Bit Twiddling Hacks](https://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10), 1997.
+说明:
 
-[2] Alexandrescu, [Three Optimization Tips for C++](http://www.slideshare.net/andreialexandrescu1/three-optimization-tips-for-c-15708507), 2012.
+`relative` 表示跟基准测试对比的数值
+
+`time/iter`表示函数每次迭代消耗的时间
+
+`iters/s` 表示函数每秒可以迭代多少次
+
