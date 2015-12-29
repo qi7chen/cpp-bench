@@ -3,16 +3,15 @@
 
 cpp-bench是一个非常轻量级的C++基准测试组件(benchmark component)。
 
-
-## Introduction
-
 这个组件取自[folly](https://github.com/facebook/folly/blob/master/folly/Benchmark.h),
 并且移植到了Visual C++ 2013.
 
 
+
+
 ## Build
 
-下载 [premake5](http://premake.github.io/download.html).
+需要[premake5](http://premake.github.io/download.html)工具链.
 
 
 ## API
@@ -37,7 +36,7 @@ BENCHMARK_RELATIVE(vectorPushFront, n)
 ~~~~~~~~
 
 
-在`BENCHMARK_SUSPEND` 宏里面的代码不会计入基准测试时间。benchmark's
+在`BENCHMARK_SUSPEND` 宏里面的代码不会计入基准测试时间。
 
 ~~~~~~~~cpp
 BENCHMARK(insertVectorBegin, n)
@@ -60,6 +59,7 @@ BENCHMARK(insertVectorBegin, n)
 BENCHMARK_DRAW_LINE()
 ~~~~~~~~
 
+
 ## 示例
 
 以 [ItoaBench.cpp](https://github.com/ichenq/cpp-bench/blob/master/test/ItoaBench.cpp)为例：
@@ -77,27 +77,27 @@ lut           | Uses lookup table (LUT) of digit pairs for division/modulo of 10
 这是在我机器上测试的结果(Core i5 @3.10Ghz)：
 
 ~~~~~~~~cpp
-Ubuntu x64 12.04 (i5-3.10GHz 4G)
-----------------------------------------------------------------------------
-../test/ItoaBench.cpp                           relative  time/iter  iters/s
-----------------------------------------------------------------------------
-ItoaSprintf                                                 91.52ns   10.93M
-ItoaMwilson                                      294.35%    31.09ns   32.16M
-ItoaNaive                                        318.20%    28.76ns   34.77M
-ItoaCount                                        299.49%    30.56ns   32.72M
-ItoaLut                                          363.15%    25.20ns   39.68M
-----------------------------------------------------------------------------
+Windows 7 x64
+============================================================================
+..\test\itoa_bench.cpp                          relative  time/iter  iters/s
+============================================================================
+ItoaSprintf                                                128.21ns    7.80M
+ItoaMwilson                                      435.79%    29.42ns   33.99M
+ItoaNaive                                        464.58%    27.60ns   36.24M
+ItoaCount                                        424.83%    30.18ns   33.14M
+ItoaLut                                          491.63%    26.08ns   38.35M
+============================================================================
 
-Windows 7 x64 (i5-3.10GHz 4G)
-----------------------------------------------------------------------------
-../test/ItoaBench.cpp                           relative  time/iter  iters/s
-----------------------------------------------------------------------------
-ItoaSprintf                                                102.49ns    9.76M
-ItoaMwilson                                      405.10%    25.30ns   39.53M
-ItoaNaive                                        405.12%    25.30ns   39.53M
-ItoaCount                                        399.97%    25.62ns   39.03M
-ItoaLut                                          424.08%    24.17ns   41.38M
-----------------------------------------------------------------------------
+Ubuntu x64 14.04
+============================================================================
+../test/itoa_bench.cpp                          relative  time/iter  iters/s
+============================================================================
+ItoaSprintf                                                 70.47ns   14.19M
+ItoaMwilson                                      303.36%    23.23ns   43.05M
+ItoaNaive                                        318.15%    22.15ns   45.15M
+ItoaCount                                        286.85%    24.57ns   40.70M
+ItoaLut                                          332.35%    21.20ns   47.16M
+============================================================================
 ~~~~~~~~
 
 
