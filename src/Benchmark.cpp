@@ -335,7 +335,7 @@ void printBenchmarkResultsAsTable(
     auto header = [&](const char* file)
     {
         separator('=');
-        printf("%-*srelative  time/iter  iters/s\n",
+        printf("%-*s relative  time/iter  iters/s\n",
             columns - 28, file);
         separator('=');
     };
