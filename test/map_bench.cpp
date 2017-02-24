@@ -39,7 +39,7 @@ BENCHMARK(MapInsert, n)
     doNotOptimizeAway(dict);
 }
 
-BENCHMARK(HashMapInsert, n)
+BENCHMARK_RELATIVE(HashMapInsert, n)
 {
     std::unordered_map<int, int> dict;
     std::vector<int> index;
@@ -69,7 +69,7 @@ BENCHMARK(MapDelete, n)
     doNotOptimizeAway(dict);
 }
 
-BENCHMARK(HashMapDelete, n)
+BENCHMARK_RELATIVE(HashMapDelete, n)
 {
     std::unordered_map<int, int> dict;
     std::vector<int> index;
@@ -106,7 +106,7 @@ BENCHMARK(MapFind, n)
     doNotOptimizeAway(total);
 }
 
-BENCHMARK(HashMapFind, n)
+BENCHMARK_RELATIVE(HashMapFind, n)
 {
     std::unordered_map<int, int> dict;
     std::vector<int> index;
