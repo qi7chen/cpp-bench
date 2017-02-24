@@ -11,7 +11,7 @@ cpp-bench是一个非常轻量级的C++基准测试组件(benchmark component)�
 
 ## Build
 
-需要[premake5](http://premake.github.io/download.html)工具链.
+需要[cmake](https://cmake.org/)工具链.
 
 
 ## API
