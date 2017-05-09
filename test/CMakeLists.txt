@@ -8,7 +8,6 @@ file(GLOB_RECURSE BENCH_SOURCE_FILES ${CPP_PROJECT_SRC_DIR}/*.cpp)
 
 set(SOURCE_FILES
     main.cpp
-    itoa_bench.cpp
     map_bench.cpp
     ) 
     

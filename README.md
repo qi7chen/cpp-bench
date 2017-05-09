@@ -62,41 +62,35 @@ BENCHMARK_DRAW_LINE()
 
 ## 示例
 
-以 [ItoaBench.cpp](https://github.com/ichenq/cpp-bench/blob/master/test/ItoaBench.cpp)为例：
-它测试不同的整数到字符串转换方法的效率。
-
-
-Function      | Description
---------------|-----------
-sprintf       | `sprintf()` in C standard library
-naive         | Compute division/modulo of 10 for each digit, store digits in temp array and copy to buffer in reverse order.
-count         | Count number of decimal digits first, using technique from [1].
-lut           | Uses lookup table (LUT) of digit pairs for division/modulo of 100. Mentioned in [2]
+以 [map_bench.cpp](https://github.com/ichenq/cpp-bench/blob/master/test/map_bench.cpp)为例：
+它测试std::map和std::unordered_map的insert, erase, find的性能差异。
 
 
 这是在我机器上测试的结果(Core i5 @3.10Ghz)：
 
 ~~~~~~~~cpp
-Windows 7 x64
+Windows 7 x64 (Visual C++ 2013)
 ============================================================================
-..\test\itoa_bench.cpp                          relative  time/iter  iters/s
+..\test\map_bench.cpp                          relative  time/iter  iters/s
 ============================================================================
-ItoaSprintf                                                128.21ns    7.80M
-ItoaMwilson                                      435.79%    29.42ns   33.99M
-ItoaNaive                                        464.58%    27.60ns   36.24M
-ItoaCount                                        424.83%    30.18ns   33.14M
-ItoaLut                                          491.63%    26.08ns   38.35M
+TreeMapInsert                                               12.51us   79.91K
+HashMapInsert                                    100.00%    12.51us   79.92K
+TreeMapDelete                                               12.51us   79.92K
+HashMapDelete                                     67.50%    18.54us   53.94K
+TreeMapFind                                                  9.62us  103.98K
+HashMapFind                                       88.39%    10.88us   91.91K
 ============================================================================
 
-Ubuntu x64 14.04
+CentOS 6.9 x64 (GCC 4.8)
 ============================================================================
-../test/itoa_bench.cpp                          relative  time/iter  iters/s
+../test/map_bench.cpp                          relative  time/iter  iters/s
 ============================================================================
-ItoaSprintf                                                 70.47ns   14.19M
-ItoaMwilson                                      303.36%    23.23ns   43.05M
-ItoaNaive                                        318.15%    22.15ns   45.15M
-ItoaCount                                        286.85%    24.57ns   40.70M
-ItoaLut                                          332.35%    21.20ns   47.16M
+MapInsert                                                    2.27us  439.83K
+HashMapInsert                                     97.19%     2.34us  427.47K
+MapDelete                                                    1.95us  512.66K
+HashMapDelete                                    124.85%     1.56us  640.08K
+MapFind                                                      1.56us  639.31K
+HashMapFind                                      105.54%     1.48us  674.74K
 ============================================================================
 ~~~~~~~~
 

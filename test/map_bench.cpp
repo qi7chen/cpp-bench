@@ -25,7 +25,7 @@ void createIndex(std::vector<int>& vec, int n)
 }
 
 // random insert
-BENCHMARK(MapInsert, n)
+BENCHMARK(TreeMapInsert, n)
 {
     std::map<int, int> dict;
     std::vector<int> index;
@@ -54,7 +54,7 @@ BENCHMARK_RELATIVE(HashMapInsert, n)
 }
 
 // random delete
-BENCHMARK(MapDelete, n)
+BENCHMARK(TreeMapDelete, n)
 {
     std::map<int, int> dict;
     std::vector<int> index;
@@ -85,7 +85,7 @@ BENCHMARK_RELATIVE(HashMapDelete, n)
 }
 
 // random find
-BENCHMARK(MapFind, n)
+BENCHMARK(TreeMapFind, n)
 {
     std::map<int, int> dict;
     std::vector<int> index;
