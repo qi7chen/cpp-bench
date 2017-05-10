@@ -73,12 +73,12 @@ Windows 7 x64 (Visual C++ 2013)
 ============================================================================
 ..\test\map_bench.cpp                          relative  time/iter  iters/s
 ============================================================================
-TreeMapInsert                                               12.51us   79.91K
-HashMapInsert                                    100.00%    12.51us   79.92K
-TreeMapDelete                                               12.51us   79.92K
-HashMapDelete                                     67.50%    18.54us   53.94K
-TreeMapFind                                                  9.62us  103.98K
-HashMapFind                                       88.39%    10.88us   91.91K
+TreeMapInsert                                                3.21us  311.88K
+HashMapInsert                                    116.61%     2.75us  363.70K
+TreeMapDelete                                                2.58us  386.97K
+HashMapDelete                                    165.26%     1.56us  639.49K
+TreeMapFind                                                  1.65us  607.41K
+HashMapFind                                      105.28%     1.56us  639.50K
 ============================================================================
 
 CentOS 6.9 x64 (GCC 4.8)
