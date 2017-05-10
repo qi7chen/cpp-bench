@@ -9,6 +9,7 @@ file(GLOB_RECURSE BENCH_SOURCE_FILES ${CPP_PROJECT_SRC_DIR}/*.cpp)
 set(SOURCE_FILES
     main.cpp
     map_bench.cpp
+    find_bench.cpp
     ) 
     
 add_executable(${TARGET_NAME} ${BENCH_HEADER_FILES} ${BENCH_SOURCE_FILES} ${SOURCE_FILES})
