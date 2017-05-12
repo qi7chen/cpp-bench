@@ -5,7 +5,7 @@
 #include "Benchmark.h"
 
 template <typename T>
-T& createMap(T& dict, int n)
+T& createIntKeyMap(T& dict, int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -14,7 +14,7 @@ T& createMap(T& dict, int n)
     return dict;
 }
 
-void createIndex(std::vector<int>& vec, int n) 
+void createIntIndex(std::vector<int>& vec, int n) 
 {
     vec.resize(n);
     for (int i = 0; i < n; i++)
@@ -29,8 +29,9 @@ BENCHMARK(TreeMapInsert, n)
 {
     std::map<int, int> dict;
     std::vector<int> index;
-    BENCHMARK_SUSPEND{
-        createIndex(index, n);
+    BENCHMARK_SUSPEND
+    {
+        createIntIndex(index, n);
     }
     for (unsigned i = 0; i < n; i++)
     {
@@ -43,8 +44,9 @@ BENCHMARK_RELATIVE(HashMapInsert, n)
 {
     std::unordered_map<int, int> dict;
     std::vector<int> index;
-    BENCHMARK_SUSPEND{
-        createIndex(index, n);
+    BENCHMARK_SUSPEND
+    {
+        createIntIndex(index, n);
     }
     for (unsigned i = 0; i < n; i++)
     {
@@ -58,9 +60,10 @@ BENCHMARK(TreeMapDelete, n)
 {
     std::map<int, int> dict;
     std::vector<int> index;
-    BENCHMARK_SUSPEND{
-        createMap(dict, n);
-        createIndex(index, n);
+    BENCHMARK_SUSPEND
+    {
+        createIntKeyMap(dict, n);
+        createIntIndex(index, n);
     }
     for (unsigned i = 0; i < n; i++)
     {
@@ -73,9 +76,10 @@ BENCHMARK_RELATIVE(HashMapDelete, n)
 {
     std::unordered_map<int, int> dict;
     std::vector<int> index;
-    BENCHMARK_SUSPEND{
-        createMap(dict, n);
-        createIndex(index, n);
+    BENCHMARK_SUSPEND
+    {
+        createIntKeyMap(dict, n);
+        createIntIndex(index, n);
     }
     for (unsigned i = 0; i < n; i++)
     {
@@ -85,13 +89,14 @@ BENCHMARK_RELATIVE(HashMapDelete, n)
 }
 
 // random find
-BENCHMARK(TreeMapFind, n)
+BENCHMARK(TreeMapIntFind, n)
 {
     std::map<int, int> dict;
     std::vector<int> index;
-    BENCHMARK_SUSPEND{
-        createMap(dict, n);
-        createIndex(index, n);
+    BENCHMARK_SUSPEND
+    {
+        createIntKeyMap(dict, n);
+        createIntIndex(index, n);
     }
     int64_t total = 0;
     for (unsigned i = 0; i < n; i++)
@@ -106,13 +111,14 @@ BENCHMARK(TreeMapFind, n)
     doNotOptimizeAway(total);
 }
 
-BENCHMARK_RELATIVE(HashMapFind, n)
+BENCHMARK_RELATIVE(HashMapIntFind, n)
 {
     std::unordered_map<int, int> dict;
     std::vector<int> index;
-    BENCHMARK_SUSPEND{
-        createMap(dict, n);
-        createIndex(index, n);
+    BENCHMARK_SUSPEND
+    {
+        createIntKeyMap(dict, n);
+        createIntIndex(index, n);
     }
     int64_t total = 0;
     for (unsigned i = 0; i < n; i++)

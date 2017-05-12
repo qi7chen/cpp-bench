@@ -9,7 +9,7 @@ struct Point {
     int16_t y = 0;
 };
 
-const int SMALL_FIND_VALUE = 100000;
+const int SMALL_FIND_VALUE = 100;
 
 template<typename T>
 static T& getSmallMap(int n)
@@ -66,18 +66,6 @@ static std::vector<Point>& getSmallVector(int n)
     return vec;
 }
 
-static bool smallVectorFind(const std::vector<Point>& vec, int32_t cell)
-{
-    for (auto i = 0U; i < vec.size(); i++)
-    {
-        if (vec[i].x + vec[i].y == cell)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 static std::vector<Point*>& getSmallPtrVector(int n)
 {
     static std::vector<Point*> vec;
@@ -95,11 +83,12 @@ static std::vector<Point*>& getSmallPtrVector(int n)
     return vec;
 }
 
-static bool smallPtrVectorFind(const std::vector<Point*>& vec, int32_t cell)
+static bool smallVectorFind(const std::vector<Point>& vec, int32_t cell)
 {
     for (auto i = 0U; i < vec.size(); i++)
     {
-        if (vec[i]->x + vec[i]->y == cell)
+        int32_t v = vec[i].x + vec[i].y;
+        if (v == cell)
         {
             return true;
         }
@@ -107,13 +96,28 @@ static bool smallPtrVectorFind(const std::vector<Point*>& vec, int32_t cell)
     return false;
 }
 
+static bool smallPtrVectorFind(const std::vector<Point*>& vec, int32_t cell)
+{
+    for (auto i = 0U; i < vec.size(); i++)
+    {
+        int32_t v = vec[i]->x + vec[i]->y;
+        if (v == cell)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+auto small_dict = getSmallMap<std::unordered_map<int32_t, Point>>(SMALL_FIND_VALUE);
+auto small_dict_ptr = getSmallPtrMap<std::unordered_map<int32_t, Point*>>(SMALL_FIND_VALUE);
+auto small_vec = getSmallVector(SMALL_FIND_VALUE);
+auto small_vec_ptr = getSmallPtrVector(SMALL_FIND_VALUE);
+
+
 BENCHMARK(SmallMapFind, n)
 {
-    BENCHMARK_SUSPEND
-    {
-        getSmallMap<std::unordered_map<int32_t, Point>>(SMALL_FIND_VALUE);
-    }
-    auto dict = getSmallMap<std::unordered_map<int32_t, Point>>(SMALL_FIND_VALUE);
+    const auto& dict = small_dict;
     uint64_t sum = 0;
     for (unsigned i = 1; i <= n; i++)
     {
@@ -124,15 +128,12 @@ BENCHMARK(SmallMapFind, n)
         }
     }
     doNotOptimizeAway(sum);
+    doNotOptimizeAway(dict);
 }
 
 BENCHMARK_RELATIVE(SmallVectorFind, n)
 {
-    BENCHMARK_SUSPEND
-    {
-        getSmallVector(SMALL_FIND_VALUE);
-    }
-    std::vector<Point> vec = getSmallVector(SMALL_FIND_VALUE);
+    const std::vector<Point>& vec = small_vec;
     uint64_t sum = 0;
     for (unsigned i = 1; i <= n; i++)
     {
@@ -143,15 +144,12 @@ BENCHMARK_RELATIVE(SmallVectorFind, n)
         }
     }
     doNotOptimizeAway(sum);
+    doNotOptimizeAway(vec);
 }
 
 BENCHMARK(SmallMapPtrFind, n)
 {
-    BENCHMARK_SUSPEND
-    {
-        getSmallPtrMap<std::unordered_map<int32_t, Point*>>(SMALL_FIND_VALUE);
-    }
-    auto dict = getSmallPtrMap<std::unordered_map<int32_t, Point*>>(SMALL_FIND_VALUE);
+    auto dict = small_dict_ptr;
     uint64_t sum = 0;
     for (unsigned i = 1; i <= n; i++)
     {
@@ -162,15 +160,12 @@ BENCHMARK(SmallMapPtrFind, n)
         }
     }
     doNotOptimizeAway(sum);
+    doNotOptimizeAway(dict);
 }
 
 BENCHMARK_RELATIVE(SmallVectorPtrFind, n)
 {
-    BENCHMARK_SUSPEND
-    {
-        getSmallPtrVector(SMALL_FIND_VALUE);
-    }
-    std::vector<Point*> vec = getSmallPtrVector(SMALL_FIND_VALUE);
+    const std::vector<Point*>& vec = small_vec_ptr;
     uint64_t sum = 0;
     for (unsigned i = 1; i <= n; i++)
     {
@@ -181,4 +176,5 @@ BENCHMARK_RELATIVE(SmallVectorPtrFind, n)
         }
     }
     doNotOptimizeAway(sum);
+    doNotOptimizeAway(vec);
 }
