@@ -66,31 +66,31 @@ BENCHMARK_DRAW_LINE()
 它测试std::map和std::unordered_map的insert, erase, find的性能差异。
 
 
-这是在我机器上测试的结果(Core i5 @3.10Ghz)：
+这是在我机器上测试的结果：
 
 ~~~~~~~~cpp
-Windows 7 x64 (Visual C++ 2013)
+i5-7300 3.4GHZ Windows 7 x64 (Visual C++ 2017)
 ============================================================================
 ..\test\map_bench.cpp                          relative  time/iter  iters/s
 ============================================================================
-TreeMapInsert                                                3.21us  311.88K
-HashMapInsert                                    116.61%     2.75us  363.70K
-TreeMapDelete                                                2.58us  386.97K
-HashMapDelete                                    165.26%     1.56us  639.49K
-TreeMapFind                                                  1.65us  607.41K
-HashMapFind                                      105.28%     1.56us  639.50K
+TreeMapInsert                                                3.13us  319.94K
+HashMapInsert                                    124.03%     2.52us  396.81K
+TreeMapDelete                                                2.61us  383.27K
+HashMapDelete                                    166.52%     1.57us  638.21K
+TreeMapIntFind                                               1.75us  572.95K
+HashMapIntFind                                   112.74%     1.55us  645.92K
 ============================================================================
 
-CentOS 6.9 x64 (GCC 4.8)
+E5-2630 CentOS 7.2 x64 (GCC 5.3)
 ============================================================================
 ../test/map_bench.cpp                          relative  time/iter  iters/s
 ============================================================================
-MapInsert                                                    2.27us  439.83K
-HashMapInsert                                     97.19%     2.34us  427.47K
-MapDelete                                                    1.95us  512.66K
-HashMapDelete                                    124.85%     1.56us  640.08K
-MapFind                                                      1.56us  639.31K
-HashMapFind                                      105.54%     1.48us  674.74K
+TreeMapInsert                                                6.26us  159.74K
+HashMapInsert                                    100.25%     6.24us  160.14K
+TreeMapDelete                                                6.70us  149.34K
+HashMapDelete                                    125.58%     5.33us  187.54K
+TreeMapIntFind                                               5.81us  172.04K
+HashMapIntFind                                   128.20%     4.53us  220.57K
 ============================================================================
 ~~~~~~~~
 
