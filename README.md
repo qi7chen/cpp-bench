@@ -69,29 +69,30 @@ BENCHMARK_DRAW_LINE()
 这是在我机器上测试的结果：
 
 ~~~~~~~~cpp
-i5-7300 3.4GHZ Windows 7 x64 (Visual C++ 2017)
+i5-7500 3.4GHZ Windows 10 x64 (Visual C++ 2017)
 ============================================================================
-..\test\map_bench.cpp                          relative  time/iter  iters/s
+cpp-bench\test\hashmap_bench.cpp                relative  time/iter  iters/s
 ============================================================================
-TreeMapInsert                                                3.13us  319.94K
-HashMapInsert                                    124.03%     2.52us  396.81K
-TreeMapDelete                                                2.61us  383.27K
-HashMapDelete                                    166.52%     1.57us  638.21K
-TreeMapIntFind                                               1.75us  572.95K
-HashMapIntFind                                   112.74%     1.55us  645.92K
+TreeMapInsert                                                3.13us  319.92K
+HashMapInsert                                    134.84%     2.32us  431.38K
+TreeMapDelete                                                3.10us  322.84K
+HashMapDelete                                    198.26%     1.56us  640.06K
+TreeMapIntFind                                               2.21us  453.43K
+HashMapIntFind                                   144.20%     1.53us  653.84K
 ============================================================================
 
-E5-2630 CentOS 7.2 x64 (GCC 5.3)
+E5-2630 2.3GHZ CentOS 7 x64 (GCC 5.3)
 ============================================================================
-../test/map_bench.cpp                          relative  time/iter  iters/s
+../test/map_bench.cpp                            relative  time/iter  iters/s
 ============================================================================
-TreeMapInsert                                                6.26us  159.74K
-HashMapInsert                                    100.25%     6.24us  160.14K
-TreeMapDelete                                                6.70us  149.34K
-HashMapDelete                                    125.58%     5.33us  187.54K
-TreeMapIntFind                                               5.81us  172.04K
-HashMapIntFind                                   128.20%     4.53us  220.57K
+TreeMapInsert                                                3.23us  309.40K
+HashMapInsert                                    103.37%     3.13us  319.83K
+TreeMapDelete                                                3.15us  317.05K
+HashMapDelete                                    147.78%     2.13us  468.54K
+TreeMapIntFind                                               2.16us  463.27K
+HashMapIntFind                                   138.02%     1.56us  639.42K
 ============================================================================
+
 ~~~~~~~~
 
 
