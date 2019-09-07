@@ -9,9 +9,10 @@ cpp-bench是一个非常轻量级的C++基准测试组件(benchmark component)�
 
 
 
-## Build
+## How To Build
 
-需要[cmake](https://cmake.org/)工具链.
+* 安装[CMake](https://cmake.org/download/)
+* 使用CMake生成Visual Studio工程或者Linux Make files
 
 
 ## API
