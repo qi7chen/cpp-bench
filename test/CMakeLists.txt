@@ -1,20 +1,20 @@
-cmake_minimum_required(VERSION 2.8)
+# Copyright (C) 2014-present prototyped.cn All rights reserved.
+# Distributed under the terms and conditions of the Apache License. 
+# See accompanying files LICENSE.
+
 project (BenchTest)
 
-set(TARGET_NAME BenchTest)
 
-file(GLOB_RECURSE BENCH_HEADER_FILES ${CPP_PROJECT_SRC_DIR}/*.h)
-file(GLOB_RECURSE BENCH_SOURCE_FILES ${CPP_PROJECT_SRC_DIR}/*.cpp)
+file(GLOB BENCH_HEADER_FILES *.h)
+file(GLOB BENCH_SOURCE_FILES *.cpp)
 
-set(SOURCE_FILES
-    main.cpp
-    hashmap_bench.cpp
-    ) 
-    
-add_executable(${TARGET_NAME} ${BENCH_HEADER_FILES} ${BENCH_SOURCE_FILES} ${SOURCE_FILES})
 
 if (WIN32)
-    TARGET_LINK_LIBRARIES(${TARGET_NAME})
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE")
+    add_executable(BenchTest WIN32 ${BENCH_HEADER_FILES} ${BENCH_SOURCE_FILES})
 elseif(UNIX)
-    TARGET_LINK_LIBRARIES(${TARGET_NAME} rt)
+    add_executable(BenchTest ${BENCH_HEADER_FILES} ${BENCH_SOURCE_FILES})
+    target_link_libraries(BenchTest rt)
 endif()
+
+target_link_libraries(BenchTest libbench)
